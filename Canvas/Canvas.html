@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <title>Canvas</title>
+    <link href="Canvas.css" rel="stylesheet" />
+</head>
+
+<body>
+    <canvas id="productImg" width="300" height="300" style="border:1px solid #000000;"></canvas>
+    <div class="name-section">
+        <label>Enter Name on T-Shirt:</label>
+        <input type="text" id="productName" value="Sonam" /><br />
+        <label>Please select color:</label>
+        <input type="color" id="fontcolor" /><br />
+        <label>Please select font size:</label>
+        <input type="range" id="fontsize" name="fontsize" min="10" max="60" /><br />
+        <label>Please select y position:</label>
+        <input type="range" id="axis-y" min="10" max="500" /><br />
+        <label>Please select x position:</label>
+        <input type="range" id="axis-x" min="10" max="500" /><br />
+    </div>
+    <div class="rect-swatch">
+        <label>Please select Rectangle color</label>
+        <input type="color" id="rectcolor" /><br>
+    </div>
+    <button onclick="applyFont()">Apply font</button>
+
+    <script>
+        function applyFont() {
+            var rectcolor = document.getElementById('rectcolor').value;
+            var fontcolor = document.getElementById('fontcolor').value;
+            var fontsize = document.getElementById('fontsize').value;
+            var positionX = document.getElementById('axis-y').value;
+            var positionY = document.getElementById('axis-x').value;
+            var productName = document.getElementById('productName').value;
+
+            fontsize = fontsize == '' ? '10px' : parseInt(fontsize);
+            fontcolor = fontcolor == '' ? 'grey' : fontcolor;
+            positionX = positionX == '' ? 300 : positionX;
+            positionY = positionY == '' ? 150 : positionY;
+
+            var productImg = document.getElementById('productImg');
+            var productContext = productImg.getContext('2d');
+            console.log(productContext)
+            var productbg = new Image();
+            productbg.src = "https://www.geodigitalimaging.com/wp-content/uploads/2019/08/white-tshirt-300x300.jpg";
+            productbg.onload = function () {
+                productContext.drawImage(productbg, 0, 0)
+                productContext.fillstyle = rectcolor;
+                productContext.font = '15px Arial';
+                
+             productContext.fillRect(120, 150, 70, 70)
+
+                productContext.fillStyle = fontcolor;
+            productContext.font = fontsize+'px Arial';
+            productContext.fillText(productName, positionX, positionY)
+
+
+            
+           
+         
+         
+
+         }
+        }
+
+        applyFont(); 
+    </script>
+
+</body>
+
+</html>
